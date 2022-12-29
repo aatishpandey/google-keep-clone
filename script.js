@@ -8,60 +8,72 @@ class App {
         this.formContainer = document.querySelector(".form-container");
         this.formButtonContainer = document.querySelector(".form-buttons-container");
         this.notesContainer = document.querySelector(".notes-container");
+        this.closeBtn = document.querySelector("#close-btn");
         this.addEventListeners();
     }
 
-    addEventListeners(){
+    addEventListeners() {
         document.addEventListener("click", event => {
             this.handleFormClick(event);
         })
 
-        this.form.addEventListener("submit",event => {
+        this.form.addEventListener("submit", event => {
             event.preventDefault();
             const title = this.formTitle.value;
             const text = this.formText.value;
-
-            if(title || text){
-                this.addNote({title,text});
+            const hasNote = title || text;
+            if (hasNote) {
+                this.addNote({ title, text });
             }
-            this.displayNote();
+
+        })
+
+        this.closeBtn.addEventListener("click", (event) => {
+            event.stopPropagation();
             this.closeForm();
         })
     }
 
-    handleFormClick(event){
+    handleFormClick(event) {
         const formClicked = this.formContainer.contains(event.target);
-        if(formClicked){
+        const title = this.formTitle.value;
+        const text = this.formText.value;
+        const hasNote = title || text;
+        if (formClicked) {
             this.openForm();
-        }else{
+        } else if (hasNote) {
+            this.addNote({ title, text });
+        } else {
             this.closeForm();
         }
     }
 
-    openForm(){
+    openForm() {
         this.formTitle.style.display = "block";
         this.formButtonContainer.style.display = "flex"
     }
 
-    closeForm(){
+    closeForm() {
         this.formTitle.style.display = "none";
         this.formButtonContainer.style.display = "none"
         this.formTitle.value = '';
         this.formText.value = '';
     }
 
-    addNote(note){
+    addNote(note) {
         const newNote = {
             title: note.title,
             text: note.text,
             color: "white",
-            id: this.notes.length>0 ? this.notes[(this.notes.length-1)].id + 1 : 1
+            id: this.notes.length > 0 ? this.notes[(this.notes.length - 1)].id + 1 : 1
         };
-        this.notes = [...this.notes,newNote];
-        console.log(this.notes)
+        this.notes = [...this.notes, newNote];
+        this.displayNote();
+        this.closeForm();
+        // console.log(this.notes)
     }
 
-    displayNote(){
+    displayNote() {
         this.notesContainer.innerHTML = this.notes.map(item => `
             <div class="note">
                 <div class="note-title">${item.title}</div>
