@@ -1,7 +1,7 @@
 
 class App {
     constructor() {
-        this.notes = [];
+        this.notes = JSON.parse(localStorage.getItem('notes')) || [];
         this.title = '';
         this.text = '';
         this.id = '';
@@ -22,7 +22,9 @@ class App {
         this.colorBtn = document.querySelector(".color-btn");
         this.ColorPallate = document.querySelector(".color-pallate");
         this.colorOption = document.querySelector(".color-option");
+        this.deleteBtn = document.querySelector(".delete-btn");
         this.addEventListeners();
+        this.render();
     }
 
     addEventListeners() {
@@ -37,10 +39,9 @@ class App {
             event.preventDefault();
             const title = this.formTitle.value;
             const text = this.formText.value;
-            const color = this.formColor;
             const hasNote = title || text;
             if (hasNote) {
-                this.addNote({ title, text, color });
+                this.addNote({ title, text });
             }
 
         })
@@ -64,6 +65,19 @@ class App {
                 this.editNoteColor(color);
             }
         })
+
+        this.deleteBtn.addEventListener("click", (event) => {
+            this.deleteNote(event);
+        })
+    }FormColorPallate
+
+    render(){
+        this.saveNotes();
+        this.displayNote();
+    }
+
+    saveNotes(){
+        localStorage.setItem('notes',JSON.stringify(this.notes));
     }
 
     handleFormClick(event) {
@@ -100,7 +114,7 @@ class App {
             id: this.notes.length > 0 ? this.notes[(this.notes.length - 1)].id + 1 : 1
         };
         this.notes = [...this.notes, newNote];
-        this.displayNote();
+        this.render();
         this.closeForm();
     }
 
@@ -142,7 +156,7 @@ class App {
         this.notes = this.notes.map(note =>
             note.id === Number(this.id) ? { ...note, title, text } : note);
 
-        this.displayNote();
+        this.render();
     }
 
     editNoteColor(color) {
@@ -150,7 +164,7 @@ class App {
         this.notes = this.notes.map(note =>
             note.id === Number(this.id) ? { ...note, color} : note);
 
-        this.displayNote();
+        this.render();
     }
 
     openColorPalatte(event) {
@@ -168,6 +182,11 @@ class App {
         }
     }
 
+    deleteNote(event){
+        this.notes = this.notes.filter(note => Number(this.id) !== note.id);
+        this.render();
+        this.closeModal();
+    }
 
 }
 
