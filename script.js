@@ -5,6 +5,7 @@ class App {
         this.title = '';
         this.text = '';
         this.id = '';
+        this.color='';
 
         this.form = document.querySelector(".form");
         this.formTitle = document.querySelector(".form-title");
@@ -14,9 +15,13 @@ class App {
         this.notesContainer = document.querySelector(".notes-container");
         this.closeBtn = document.querySelector("#close-btn");
         this.modalContainer = document.querySelector(".modal-container");
+        this.modal = document.querySelector(".modal");
         this.modalTitle = document.querySelector(".modal-title")
         this.modalText = document.querySelector(".modal-text")
         this.modalCloseBtn = document.querySelector(".modal-close-btn");
+        this.colorBtn = document.querySelector(".color-btn");
+        this.ColorPallate = document.querySelector(".color-pallate");
+        this.colorOption = document.querySelector(".color-option");
         this.addEventListeners();
     }
 
@@ -25,15 +30,17 @@ class App {
             this.handleFormClick(event);
             this.selectNote(event);
             this.openModal(event);
+            this.closeColorPallete(event);
         })
 
         this.form.addEventListener("submit", event => {
             event.preventDefault();
             const title = this.formTitle.value;
             const text = this.formText.value;
+            const color = this.formColor;
             const hasNote = title || text;
             if (hasNote) {
-                this.addNote({ title, text });
+                this.addNote({ title, text, color });
             }
 
         })
@@ -45,6 +52,17 @@ class App {
 
         this.modalCloseBtn.addEventListener("click", (event) => {
             this.closeModal();
+        })
+
+        this.colorBtn.addEventListener("click", (event) => {
+            this.openColorPalatte(event);
+        })
+
+        this.ColorPallate.addEventListener("click", (event) => {
+            const color = event.target.dataset.color;
+            if (color) {
+                this.editNoteColor(color);
+            }
         })
     }
 
@@ -88,7 +106,7 @@ class App {
 
     displayNote() {
         this.notesContainer.innerHTML = this.notes.map(item => `
-            <div class="note" data-id="${item.id}">
+            <div style="background:${item.color};" class="note" data-id="${item.id}">
                 <div class="note-title">${item.title}</div>
                 <div class="note-text">${item.text}</div>
             </div>
@@ -126,6 +144,30 @@ class App {
 
         this.displayNote();
     }
+
+    editNoteColor(color) {
+        this.modal.style.backgroundColor = color;
+        this.notes = this.notes.map(note =>
+            note.id === Number(this.id) ? { ...note, color} : note);
+
+        this.displayNote();
+    }
+
+    openColorPalatte(event) {
+        if (!event.target.classList.contains('color-btn')) return;
+        const noteCoords = event.target.getBoundingClientRect();
+        const horizontal = noteCoords.left + window.scrollX;
+        const vertical = noteCoords.top + window.scrollY + 20;
+        this.ColorPallate.style.transform = `translate(${horizontal}px,${vertical}px)`;
+        this.ColorPallate.style.display = "flex";
+    }
+
+    closeColorPallete(event) {
+        if (!event.target.classList.contains('color-btn') && !event.target.classList.contains('color-option')) {
+            this.ColorPallate.style.display = "none";
+        }
+    }
+
 
 }
 

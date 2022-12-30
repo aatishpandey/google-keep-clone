@@ -14,7 +14,16 @@
             <input type="text" placeholder="Title" class="modal-title"/>
             <textarea placeholder="Text" class="modal-text" rows="50"></textarea>
             <div class="modal-btn-container">
+                <div class="fa-solid fa-trash-can delete-btn toolbar-btn"></div>
+                <div class="fa-solid fa-palette color-btn toolbar-btn"></div>
                 <button class="modal-close-btn">Close</button>
+            </div>
+            <div class="color-pallate">
+                <div class="color-option" data-color="#579BB1" id="color-1"></div>
+                <div class="color-option" data-color="#E1D7C6" id="color-2"></div>
+                <div class="color-option" data-color="#ECE8DD" id="color-3"></div>
+                <div class="color-option" data-color="#CEEDC7" id="color-4"></div>
+                <div class="color-option" data-color="#FFD4B2" id="color-5"></div>
             </div>
         </div>
     </div>
@@ -28,8 +37,11 @@
                 <input class="form-title form-input" type="text" placeholder="Title"/>
                 <textarea class="form-text form-input" placeholder="Take a note" cols="50"></textarea>
                 <div class="form-buttons-container">
+                    <!-- <div class="fa-solid fa-trash-can delete-btn toolbar-btn"></div>
+                    <div class="fa-solid fa-palette color-btn toolbar-btn"></div> -->
                     <button type="submit" id="submit-btn" class="form-button">Submit</button>
                     <button type="button" id="close-btn" class="form-button">Close</button>
+                </div>
                 </div>
             </form>
         </div>
@@ -40,6 +52,8 @@
             </div>
         </div>
     </main>
+     <!-- font awesome kit -->
+     <script src="https://kit.fontawesome.com/de6fba1868.js" crossorigin="anonymous"></script>
     <script src="/script.js"></script>
 </body>
 </html>
