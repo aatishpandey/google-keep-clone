@@ -1,7 +1,7 @@
 @import url(/stylesheets/reset.css);
 
 
-.header-logo{
+.header-logo {
     width: 100%;
     font-weight: 600;
     font-size: 1.3rem;
@@ -11,44 +11,44 @@
     align-items: center;
 }
 
-.form-container{
+.form-container {
     width: 60%;
     margin: auto;
     box-shadow: 0 0 5px 5px rgb(195, 197, 197);
-    overflow:hidden;
+    overflow: hidden;
 
     border-radius: 8px;
 }
 
-.form{
-    padding:2%;
+.form {
+    padding: 2%;
     width: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 }
 
-.form-title{
+.form-title {
     display: none;
 }
 
-.form-input{
+.form-input {
     outline: none;
     border: none;
     margin-bottom: 10px;
     width: 100%;
 }
 
-.form-text{
+.form-text {
     resize: none;
 }
 
-.form-buttons-container{
+.form-buttons-container {
     justify-content: flex-end;
     display: none;
 }
 
-.form-button{
+.form-button {
     border: none;
     cursor: pointer;
     background-color: transparent;
@@ -57,20 +57,20 @@
     border-radius: 5px;
 }
 
-.form-button:hover{
+.form-button:hover {
     background-color: rgb(219, 218, 218);
 }
 
-#submit-btn{
+#submit-btn {
     background-color: rgb(56, 123, 224);
     color: white;
 }
 
-#submit-btn:hover{
+#submit-btn:hover {
     background-color: rgb(20, 93, 204);
 }
 
-.notes-container{
+.notes-container {
     width: 100%;
     text-align: center;
     padding: 5% 10%;
@@ -79,19 +79,19 @@
     flex-wrap: wrap;
 }
 
-.note{
-   width: 20%;
-   border: 1px solid rgb(216, 204, 204);
-   border-radius: 5px;
-   text-align: left;
-   display: flex;
-   flex-direction: column;
-   flex-wrap: wrap;
-   overflow: hidden;
-   margin: 0 1%;
+.note {
+    width: 20%;
+    border: 1px solid rgb(216, 204, 204);
+    border-radius: 5px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow: hidden;
+    margin: 0 1%;
 }
 
-.note-title{
+.note-title {
     width: 100%;
     font-weight: 600;
     padding: 5%;
@@ -99,28 +99,98 @@
     word-wrap: break-word;
 }
 
-.note-text{
+.note-text {
     width: 100%;
     padding: 5%;
     white-space: pre-wrap;
     word-wrap: break-word;
 }
 
+.modal-container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(194, 191, 187, 0.527);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+}
 
-@media screen and (max-width:900px){
-    .notes-container{
+.modal {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 40%;
+    height: 200px;
+    padding: 2%;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+.modal-title{
+    outline: none;
+    border: none;
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 5px 0;
+}
+
+
+.modal-text{
+    outline: none;
+    border: none;
+    width: 100%;
+    resize: none;
+    padding: 5px 0;
+}
+
+.modal-btn-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+}
+
+.modal-close-btn{
+    border: none;
+    outline: none;
+    cursor:pointer;
+    background-color: transparent;
+    padding: 8px 15px;
+}
+
+.modal-close-btn:hover{
+    background-color: gainsboro;
+    border-radius: 5px;
+
+}
+
+.open-modal {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* media queries */
+@media screen and (max-width:900px) {
+    .notes-container {
         flex-direction: column;
     }
-    .note{
+
+    .note {
         width: 100%;
         margin: 1% 0;
     }
 
-    .note-title{
+    .note-title {
         padding: 2% 3%;
     }
 
-    .note-text{
+    .note-text {
         padding: 2% 3%;
     }
 }
